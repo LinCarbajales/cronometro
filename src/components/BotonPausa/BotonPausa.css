@@ -1,0 +1,26 @@
+.verde {
+    background-color: rgb(179, 252, 179);
+    border-color: black;
+}
+
+.aqua {
+    background-color: aquamarine;
+    border-color: black;
+}
+
+.blue {
+    background-color: blue;
+    border-color: black;
+}
+
+.base {
+    background-color: rgb(253, 222, 164);
+}
+
+.boton {
+    border: 2px solid orange;
+    border-radius: 80px;
+    width: 200px;
+    transition: background-color 0.3s;
+    
+}
