@@ -13,11 +13,22 @@ function App() {
   tiempo.current = setInterval(() => {
     setCount(count => count + 1);
     }, 1000);
+
+    changeState(true);
   
     return () => clearInterval(tiempo.current);
+
   }
 
-  useEffect(() => arrancarCronometro() , []);
+  useEffect(() =>  {
+    arrancarCronometro();
+    
+    return () => {
+      if (tiempo.current) {
+        clearInterval(tiempo.current);
+      }
+    };
+    }, []);
 
   const pausar = () => {
     clearInterval(tiempo.current);
@@ -26,13 +37,24 @@ function App() {
 
   const reiniciar = () => {
     setCount(0);
-  }
+  };
+
+  const colores =
+        count < 10 ? 'base' :
+        count >= 10 && count <= 20 ? 'aqua' :
+        'verde';
+
+  const mensaje = 
+        count < 10 ? 'Pausa de 10 segundos.' :
+        count >= 10 && count <= 20 ? 'Ya queda menos.' :
+        'Ya te puedes ir a casa.';
 
   return (
     <>
       <h1>Cronómetro</h1>
-      <p>Segundos: {count}</p>
-      <button onClick={pausar}>{state ? 'Pausar' : 'Reanudar'}</button>
+      <p>{mensaje}</p>
+      <p className={colores}>Segundos: {count}</p>
+      <button onClick={state ? pausar : arrancarCronometro}>{state ? 'Pausar' : 'Reanudar'}</button>
       <button onClick={reiniciar}>Reiniciar</button>
     </>
   )
